@@ -224,7 +224,7 @@ public class Tree {
         return sum; //If n is the root, we would get the sum of all the tree. However, if we use one of the root's child as starting point, we would get the sum of only one of the subtrees.
     }
     
-    public Tree InvertTree(Node n){ //Same principle as the above subroutine. Only difference is that instead of making a sum, we are creting a node with the same value in another tree class.
+    public Tree PseudoInvertTree(Node n){ //Same principle as the above subroutine. Only difference is that instead of making a sum, we are creting a node with the same value in another tree class.
         Tree itree = new Tree();
         Queue<Node> queue = new LinkedList<Node>(); //We assume that the node we're using as a starting point for exists because we know that there are 10 nodes.
         queue.add(n);
@@ -324,5 +324,27 @@ public class Tree {
             } 
         }
         return null; //In case there isn't a node with the given value in the tree.
+    }
+    
+    public Tree InvertTree(Tree t){
+        Tree tree = t;
+        Queue<Node> queue = new LinkedList<Node>();
+        if (tree.root == null){ //We check that the tree is not empty.
+            return null;
+        }
+        queue.add(tree.root);
+        while (queue.isEmpty()==false){
+            Node temp = queue.poll();
+            Node nt = temp.left;
+             temp.left = temp.right;
+             temp.right= nt;
+            if (temp.right != null){
+                queue.add(temp.right);
+            }
+            if (temp.left != null){
+                queue.add(temp.left);
+            } 
+        }
+        return tree;
     }
 }

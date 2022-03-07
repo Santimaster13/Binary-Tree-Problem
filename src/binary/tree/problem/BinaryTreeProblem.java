@@ -31,7 +31,7 @@ public class BinaryTreeProblem {
             
             tree.AddNode(num);
         }
-        System.out.println("El árbol queda de la siguiente forma: ");
+        System.out.println("El árbol 1 queda de la siguiente forma: ");
         tree.NormalTraverse(tree.root, 0);
         System.out.println(" ");
         System.out.println("El número más grande del árbol es " + tree.MaxVal(tree.root));
@@ -40,15 +40,18 @@ public class BinaryTreeProblem {
         int right = tree.Sum(tree.root.right);
         System.out.println("La suma de los valores del subarbol izquierdo es " + left);
         System.out.println("La suma de los valores del subarbol derecho es " + right);
-        Tree itree = tree.InvertTree(tree.root);
+        Tree pitree = tree.PseudoInvertTree(tree.root);
         if (tree.SearchNode(tree.root, left) == null){ //We check if the sum of the left subtree is a number already in the right subtree. If it's not, we add it to the inverted tree. (It's quite the stretch but never underestimate bad luck XD).
-          itree.AddNodeI(left); 
+          pitree.AddNodeI(left); 
         }
-        itree.AddNodeI(right); 
+        pitree.AddNodeI(right); 
         System.out.println(" ");
-        System.out.println("El árbol queda de la siguiente forma: ");
+        System.out.println("El árbol 2 queda de la siguiente forma: ");
+        pitree.NormalTraverse(pitree.root, 0);
+        Tree itree = tree.InvertTree(pitree);
+        System.out.println(" ");
+        System.out.println("El árbol 3 queda de la siguiente forma: ");
         itree.NormalTraverse(itree.root, 0);
-        
     }
     
 }
